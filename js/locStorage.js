@@ -5,10 +5,12 @@ localStorage
 // установить пару ключ/значение
 localStorage.setItem('test', 123);
 localStorage['test'] = 123;
+localStorage.test = 123;
 
 // получить значение по ключу
 localStorage.getItem('test');
 localStorage['test'];
+localStorage.test;
 
 
 // удалить пару ключ/значение
@@ -23,16 +25,13 @@ localStorage.length;
 // получение значения по ключу
 localStorage.key(0);
 
-function handle_storage(e) {
-  if (!e) { e = window.event; }
-  console.log('changes: ' + e);
-}
-
-if (window.addEventListener) {
-  window.addEventListener("storage", handle_storage, false);
-} else {
-  window.attachEvent("onstorage", handle_storage);
-};
+window.addEventListener('storage', function(e) {  
+  document.querySelector('.my-key').textContent = e.key;
+  document.querySelector('.my-old').textContent = e.oldValue;
+  document.querySelector('.my-new').textContent = e.newValue;
+  document.querySelector('.my-url').textContent = e.url;
+  document.querySelector('.my-storage').textContent = e.storageArea;
+});
 
 
 localStorage.setItem("test", 123);
